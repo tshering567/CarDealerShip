@@ -7,6 +7,7 @@ import java.io.IOException;
 
 public class DealerShipFileManager {
     public DealerShip getDealership(){
+        DealerShip dealerShip = null;
         try { //we're creating filereader and bufferreader and passing the inventory.csv file into it.
             FileReader fileReader = new FileReader("inventory.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -17,7 +18,7 @@ public class DealerShipFileManager {
                 String name = details[0];
                 String address = details[1];
                 String phone = details[2];
-                DealerShip dealerShip = new DealerShip(name, address, phone);
+                dealerShip = new DealerShip(name, address, phone);
 
             while ((input = bufferedReader.readLine())!= null){
                 details = input.split("\\|");
@@ -41,7 +42,7 @@ public class DealerShipFileManager {
             System.out.println("File not found");
             System.exit(0);
         }
-        return DealerShip();
+        return dealerShip;
     }
 
     public void saveDealership(){
