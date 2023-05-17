@@ -5,7 +5,7 @@ public class App {
 //DealerShipFileManager Dfm = new DealerShipFileManager();
 //DealerShip d = Dfm.getDealership();
 //7
-// d.getAllVehicles();
+// 1d.getAllVehicles();
 
 UserInterface ui = new UserInterface(); //creating an instance using new operator
 ui.display();

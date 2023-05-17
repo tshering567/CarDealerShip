@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
+  // public static Scanner scanner = new Scanner(System.in);
    DealerShip dealerShip;
     private void init(){
       DealerShipFileManager fileManager = new DealerShipFileManager();
@@ -61,29 +62,53 @@ public class UserInterface {
    }
 
    public void processGetByPriceRequest(){
-        Scanner scanner = new Scanner(System.in);
-        Double input = scanner.nextDouble();
-       System.out.println("Please enter a min and max price:");
-        this.dealerShip.getVehiclesByPrice();
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Please enter a minimum price");
+       int min = scanner.nextInt();
+       System.out.println("Please enter a maximum price");
+       int max = scanner.nextInt();
+        this.dealerShip.getVehiclesByPrice(min, max);
    }
 
    public void processGetByMakeModelRequest(){
+        Scanner scanner = new Scanner(System.in);
+       System.out.println("Please enter the make of the vehicle");
+       String make = scanner.nextLine();
+       System.out.println("Please enter the model of the vehicle");
+       String model = scanner.nextLine();
+       this.dealerShip.getVehiclesByMakeModel(make,model);
 
    }
 
    public void processGetByYearRequest(){
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Please enter the minimum Year of the vehicle");
+       int minYear = scanner.nextInt();
+       System.out.println("Please enter the maximum Year of the vehicle");
+       int maxYear = scanner.nextInt();
+       this.dealerShip.getVehiclesByYear(minYear, maxYear);
+
+
 
    }
 
    public void processGetByColorRequest(){
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Please enter the color of the vehicle");
+       String color = scanner.nextLine();
+       this.dealerShip.getVehiclesByColor(color);
 
 
    }
 
    public void processGetByMileageRequest(){
-
-
-   }
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Please enter the minimum mileage of the vehicle");
+       int min = scanner.nextInt();
+       System.out.println("Please enter the maximum mileage of the vehicle");
+       int max = scanner.nextInt();
+       this.dealerShip.getVehiclesByMileage(min, max);
+    }
 
    public void processGetByVehicleTypeRequest(){
 

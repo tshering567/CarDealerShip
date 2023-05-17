@@ -38,27 +38,60 @@ public class DealerShip {
         this.address = address;
         this.phone = phone;
     }
-    public void getVehiclesByPrice(){
+    public void getVehiclesByPrice(int min, int max){
+        System.out.println("Here are all the vehicles within your selected price range:");
+        boolean found = false;
     for (Vehicle v : inventory){
-        int max = 50000;
-        int min = 0;
-
         if( v.getPrice() <= max && v.getPrice() >= min){
-            System.out.println("Here are all the vehicles within your selected price range:");
-            System.out.println(v.getPrice());
+            found = true;
+           displayVehicles(v);
         }
     }
     }
     public void getVehiclesByMakeModel(String make, String model){
+        System.out.println("Here are the vehicles with the selected Make and Model:");
+        boolean found = false;
+        for( Vehicle v: inventory){
+            if(v.getMake().equalsIgnoreCase(make) && v.getModel().equalsIgnoreCase(model)){
+                found = true;
+                displayVehicles(v);
+            }
 
+        }
     }
-    public void getVehiclesByYear(int min, int max){
+    public void getVehiclesByYear(int minYear, int maxYear){
+        System.out.println("Here are the vehicles with the selected Year: \n");
+        boolean found = false;
+        for(Vehicle v : inventory){
+            if( v.getYear() <= maxYear && v.getYear() >= minYear){
+                found = true;
+                displayVehicles(v);
+
+            }
+
+        }
 
     }
     public void getVehiclesByColor(String color){
+        System.out.println("Here are the vehicles with the selected Color: \n");
+        boolean found = false;
+        for(Vehicle v : inventory){
+            if(v.getColor().equalsIgnoreCase(color)){
+               found = true;
+                displayVehicles(v);
+            }
+        }
 
     }
     public void getVehiclesByMileage(int min, int max){
+        System.out.println("Here are the vehicles with the selected Mileage: \n");
+        boolean found = false;
+        for(Vehicle v : inventory){
+            if(v.getOdometer() <= max && v.getOdometer() >= min){
+                found = true;
+                displayVehicles(v);
+            }
+        }
 
     }
     public void getVehiclesByType(String type){
@@ -66,9 +99,7 @@ public class DealerShip {
     }
     public void getAllVehicles(){
      for (Vehicle v : inventory){
-         System.out.println(v.getVin()+ " " + v.getYear() + " " + v.getMake() + " "
-         + v.getModel() + " " + v.getVehicleType() + " " + v.getColor() + " " +
-                 v.getOdometer() + " " + v.getPrice());
+        displayVehicles(v);
 
      }
     }
@@ -77,6 +108,13 @@ public class DealerShip {
 
     }
     public void removeVehicle(String vehicle){
+
+    }
+    public void displayVehicles(Vehicle v){
+        System.out.println(v.getVin()+ " " + v.getYear() + " " + v.getMake() + " "
+                    + v.getModel() + " " + v.getVehicleType() + " " + v.getColor() + " " +
+                    v.getOdometer() + " " + v.getPrice());
+
 
     }
 }
