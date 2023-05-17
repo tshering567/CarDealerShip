@@ -18,9 +18,9 @@ public class UserInterface {
        int input;
        do {
 
-           input = Integer.parseInt(scanner.nextLine());
 
-           System.out.println("Main Menu:");
+
+           System.out.println("\n \n Main Menu:");
            //1 Display the menu
            System.out.println("Display by Price [1]");
            System.out.println("Display by Make and Model [2]");
@@ -32,7 +32,7 @@ public class UserInterface {
            System.out.println("Add vehicle [8]");
            System.out.println("Remove vehicle [9]");
            System.out.println("Exit [0]");
-
+           input = Integer.parseInt(scanner.nextLine());
 
            //2 Read user's command
            //3 switch statement that calls the correct process() method
@@ -61,7 +61,10 @@ public class UserInterface {
    }
 
    public void processGetByPriceRequest(){
-
+        Scanner scanner = new Scanner(System.in);
+        Double input = scanner.nextDouble();
+       System.out.println("Please enter a min and max price:");
+        this.dealerShip.getVehiclesByPrice();
    }
 
    public void processGetByMakeModelRequest(){
@@ -87,7 +90,7 @@ public class UserInterface {
    }
 
    public void getAllVehicleRequest(){
-
+   this.dealerShip.getAllVehicles();
 
    }
    public void AddVehicleRequest(){

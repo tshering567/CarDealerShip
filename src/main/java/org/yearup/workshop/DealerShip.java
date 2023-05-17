@@ -38,8 +38,16 @@ public class DealerShip {
         this.address = address;
         this.phone = phone;
     }
-    public void getVehiclesByPrice(int min,int max){
+    public void getVehiclesByPrice(){
+    for (Vehicle v : inventory){
+        int max = 50000;
+        int min = 0;
 
+        if( v.getPrice() <= max && v.getPrice() >= min){
+            System.out.println("Here are all the vehicles within your selected price range:");
+            System.out.println(v.getPrice());
+        }
+    }
     }
     public void getVehiclesByMakeModel(String make, String model){
 
