@@ -173,13 +173,18 @@ public class UserInterface {
        Scanner scanner = new Scanner(System.in);
        System.out.println("Please enter the vin of the vehicle that you would like to remove: ");
        int vin = scanner.nextInt();
-       for(Vehicle v: this.dealerShip.getAllVehicles())
+       Vehicle vehicleEntered = null;
+       for(Vehicle v: dealerShip.getAllVehicles())
            if (v.getVin() == vin) {
-               System.out.println("vehicle has been removed");
-               this.dealerShip.removeVehicle(v);
+               vehicleEntered = v;
                break;
-
-           }
-
+           } if (vehicleEntered != null){
+               dealerShip.removeVehicle(vehicleEntered);
+           System.out.println("Vehicle removed successfully. Thank You!");
+           DealerShipFileManager DFM = new DealerShipFileManager();
+          DFM.saveDealership(dealerShip);
+       }else{
+           System.out.println("No match");
+       }
    }
 }
