@@ -1,7 +1,6 @@
 package org.yearup.workshop;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -45,7 +44,7 @@ public class DealerShipFileManager {
         return dealerShip;
     }
 
-    public void saveDealership(){
+    public void saveDealership(DealerShip dealerShip){
 
     }
 }

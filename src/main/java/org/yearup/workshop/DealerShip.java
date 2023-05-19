@@ -1,6 +1,7 @@
 package org.yearup.workshop;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DealerShip {
     private String name;
@@ -95,25 +96,43 @@ public class DealerShip {
 
     }
     public void getVehiclesByType(String type){
+        System.out.println("Here are the vehicles with the selected Type: \n");
+        boolean found = false;
+        for(Vehicle v : inventory){
+            if(v.getVehicleType().equalsIgnoreCase(type)){
+                found = true;
+                displayVehicles(v);
+            }
+        }
 
     }
-    public void getAllVehicles(){
-     for (Vehicle v : inventory){
-        displayVehicles(v);
-
+    public List<Vehicle> getAllVehicles(){
+        return new ArrayList<>(inventory);
      }
-    }
+
     public void addVehicle(Vehicle vehicle){
         inventory.add(vehicle);
 
     }
-    public void removeVehicle(String vehicle){
+    public void removeVehicle(Vehicle vehicle){
+        inventory.remove(vehicle);
 
     }
     public void displayVehicles(Vehicle v){
-        System.out.println(v.getVin()+ " " + v.getYear() + " " + v.getMake() + " "
-                    + v.getModel() + " " + v.getVehicleType() + " " + v.getColor() + " " +
-                    v.getOdometer() + " " + v.getPrice());
+       // System.out.println(v.getVin()+ " " + v.getYear() + " " + v.getMake() + " "
+                  //  + v.getModel() + " " + v.getVehicleType() + " " + v.getColor() + " " +
+                  //  v.getOdometer() + " " + v.getPrice());
+       // System.out.println("VIN                  YEAR      MAKE           MODEL          TYPE       COLOR      ODOMETER      PRICE");
+       // System.out.println("--------------------------------------------------------------------------------------------------------------\n");
+        System.out.printf("%-20d %-7d %-15s %-15s %-10s %-10s %-20d %-20.2f \n",
+                v.getVin(),
+                v.getYear(),
+                v.getMake(),
+                v.getModel(),
+                v.getVehicleType(),
+                v.getColor(),
+                v.getOdometer(),
+                v.getPrice());
 
 
     }
