@@ -11,6 +11,12 @@ public class UserInterface {
       DealerShipFileManager fileManager = new DealerShipFileManager();
       this.dealerShip = fileManager.getDealership();
    }
+   public static Scanner scanner= new Scanner(System.in);
+    public void printHeader(){
+        System.out.println("_______________________________________________________________________________________________________________");
+        System.out.println("VIN                 YEAR      MAKE            MODEL         TYPE         COLOR     ODOMETER           PRICE");
+        System.out.println("_______________________________________________________________________________________________________________");
+    }
 
    public void display() {
        ////Load the dealership data
@@ -84,6 +90,7 @@ public class UserInterface {
        System.out.println("Please enter a maximum price");
        int max = scanner.nextInt();
         this.dealerShip.getVehiclesByPrice(min, max);
+
    }
 
    public void processGetByMakeModelRequest(){
@@ -137,6 +144,7 @@ public class UserInterface {
    }
 
    public void getAllVehicleRequest(){
+        printHeader();
      ArrayList list = (ArrayList) dealerShip.getAllVehicles();
      displayVehicles(list);
 
