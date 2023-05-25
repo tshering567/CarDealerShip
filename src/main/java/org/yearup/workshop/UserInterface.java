@@ -1,15 +1,20 @@
 package org.yearup.workshop;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
   // public static Scanner scanner = new Scanner(System.in);
-   DealerShip dealerShip;
+  private DealerShip dealerShip;
+
+    private contractFileManager contractFileManager;
+
     private void init(){
       DealerShipFileManager fileManager = new DealerShipFileManager();
       this.dealerShip = fileManager.getDealership();
+        this.contractFileManager = new contractFileManager();
    }
    public static Scanner scanner= new Scanner(System.in);
     public void printHeader(){
@@ -39,6 +44,7 @@ public class UserInterface {
            System.out.println("Display All vehicles [7]");
            System.out.println("Add vehicle [8]");
            System.out.println("Remove vehicle [9]");
+           System.out.println("Buy or Lease Vehicle [10]");
            System.out.println("Exit [0]");
            input = Integer.parseInt(scanner.nextLine());
 
@@ -55,6 +61,7 @@ public class UserInterface {
                case 7 -> getAllVehicleRequest();
                case 8 -> AddVehicleRequest();
                case 9 -> RemoveVehicleRequest();
+               case 10 -> buyOrLeaseVehicle();
                case 0 -> {
                    System.out.println("Have a nice day :)");
                    System.exit(0);
@@ -67,6 +74,9 @@ public class UserInterface {
 
 
    }
+
+    private void buyOrLeaseVehicle() {
+    }
 
     public void displayVehicles(ArrayList<Vehicle> inventory){
 
@@ -195,4 +205,86 @@ public class UserInterface {
            System.out.println("No match");
        }
    }
+    public void buyOrLeaseAVehicle() {
+        LocalDate date = LocalDate.now();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("What is your full name?");
+        String customerName = scanner.nextLine();
+        System.out.println("What is your email address?");
+        String customerEmail = scanner.nextLine();
+        System.out.println("Do you want to lease or buy? (Enter lease/buy)");
+        String leaseOrBuy = scanner.nextLine().toLowerCase();
+
+        DealerShip dealership;
+        dealership = null;
+        if (leaseOrBuy.equals("buy")) {
+            System.out.println("Which vehicle do you want to buy? (Enter VIN)");
+            int chosenVehicle = scanner.nextInt();
+            Vehicle vehicle = dealership.getVehicleByVin(chosenVehicle);
+
+            if (vehicle != null) {
+                System.out.println("Do you want to finance the car? (y/n)");
+                String financeOrNot = scanner.nextLine().toLowerCase();
+                boolean finance = financeOrNot.equals("y");
+
+                SalesContract salesContract = new SalesContract(
+                        date.toString(), customerName, customerEmail, vehicle
+                );
+                double monthlyPayment = salesContract.getMonthlyPayment();
+                if (finance) {
+                    System.out.println("Your monthly payment is " + monthlyPayment);
+                }
+                System.out.println("Congrats! The vehicle is yours.");
+                contractFileManager.saveContract(salesContract);
+                dealership.removeVehicle(vehicle);
+            } else {
+                System.out.println("Vehicle not found.");
+            }
+        } else if (leaseOrBuy.equals("lease")) {
+            System.out.println("Which vehicle do you want to lease? (Enter VIN)");
+            int chosenVehicle = scanner.nextInt();
+            Vehicle vehicle = dealership.getVehicleByVin(chosenVehicle);
+
+            if (vehicle != null) {
+                LeaseContract leaseContract = new LeaseContract(
+                        date.toString(), customerName, customerEmail, vehicle.toString());
+
+                double monthlyPayment = leaseContract.getMonthlyPayment();
+                System.out.println("Congrats! The vehicle is yours for the next 3 years.");
+                System.out.println("Your monthly payment is " + monthlyPayment);
+                org.yearup.workshop.contractFileManager.saveContract(leaseContract);
+                dealership.removeVehicle(vehicle);
+            } else {
+                System.out.println("Vehicle not found.");
+            }
+        } else {
+            System.out.println("Invalid response. Try again.");
+        }
+    }
+
+
+
+
+
+    private void displayVehicles(List<Vehicle> vehicles) {
+        if (vehicles.isEmpty()) {
+            System.out.println("No vehicles found.");
+        } else {
+            System.out.println("List of Vehicles available:");
+            for (Vehicle v : vehicles) {
+                System.out.printf("%-20d %-7d %-15s %-15s %-10s %-10s %-20d %-20.2f \n",
+                        v.getVin(),
+                        v.getYear(),
+                        v.getMake(),
+                        v.getModel(),
+                        v.getVehicleType(),
+                        v.getColor(),
+                        v.getOdometer(),
+                        v.getPrice());
+            }
+        }
+    }
 }
+
+

@@ -1,5 +1,6 @@
 package org.yearup.workshop;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class SalesContract extends Contract{
@@ -7,6 +8,10 @@ public class SalesContract extends Contract{
     private double processingFee;
     private double recordingFee;
     private boolean financed;
+
+    public SalesContract(String dateOfContract, String customerName, String customerEmail,Vehicle vehicle) {
+        super(dateOfContract, customerName, customerEmail, vehicle);
+    }
 
     public double getSalesTax() {
         return salesTax;
@@ -58,34 +63,51 @@ public class SalesContract extends Contract{
         double n;
         double t;
         double payment;
-      do {
-          if (vehiclePrice >= 10000) {
-              r = 0.0425;
-              t = 4;
-              n = 12;
-          } else {
-              r = 0.0525;
-              t = 2;
-              n = 12;
-          }
-          double rOverN = r / n;
-          double numerator = p * rOverN;
-          double onePlusOverN = 1 + rOverN;
-          double power = -t * n;
-          double denominator = 1 - Math.pow(onePlusOverN, power);
-          payment = numerator / denominator;
-          return payment;
-      } while(financed == true);
-
-      //if NO return 0
-
-
-
+        if(financed = true) {
+            if (vehiclePrice >= 10000) {
+                r = 0.0425;
+                t = 4;
+                n = 12;
+            } else {
+                r = 0.0525;
+                t = 2;
+                n = 12;
+            }
+            double rOverN = r / n;
+            double numerator = p * rOverN;
+            double onePlusOverN = 1 + rOverN;
+            double power = -t * n;
+            double denominator = 1 - Math.pow(onePlusOverN, power);
+            payment = numerator / denominator;
+        } else {
+        payment = 0 ;
+        }
+        return payment;
     }
+
+
+
+
+
 
     @Override
     public String getPersistenceString() {
+        DecimalFormat df = new DecimalFormat(".00");
+        StringBuilder sb = new StringBuilder();
 
-        return String.format()
+        sb.append("SALE|")
+                .append(getDateOfContract()).append("|")
+                .append(getCustomerName()).append("|")
+                .append(getCustomerEmail()).append("|")
+                .append(getVehicle()).append("|")
+                .append(df.format(getSalesTax())).append("|")
+                .append(df.format(getRecordingFee())).append("|")
+                .append(df.format(getProcessingFee())).append("|")
+                .append(df.format(getTotalPrice())).append("|")
+                .append(isFinanced() ? "Y" : "N").append("|")
+                .append(df.format(getMonthlyPayment()));
+        return sb.toString();
+
+
     }
 }

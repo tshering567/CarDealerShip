@@ -8,6 +8,9 @@ public abstract class Contract {
    private Double totalPrice;
    private Double monthlyPayment;
 
+   public Contract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicle) {
+   }
+
    public String getDateOfContract() {
       return dateOfContract;
    }
