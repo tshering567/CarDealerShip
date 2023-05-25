@@ -7,4 +7,8 @@ public class contractFileManager {
         this.fileName = fileName;
     }
 
+
+    public void saveContract (Contract c){
+
+    }
 }

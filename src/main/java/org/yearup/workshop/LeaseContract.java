@@ -7,8 +7,11 @@ public class LeaseContract extends Contract {
 
     @Override
     public double getTotalPrice() {
-
-        return 0;
+        double vehiclePrice;
+        double totalPrice;
+        vehiclePrice = getVehicle().getPrice();
+        totalPrice = vehiclePrice + (vehiclePrice * 0.07);
+        return totalPrice;
     }
 
     @Override
