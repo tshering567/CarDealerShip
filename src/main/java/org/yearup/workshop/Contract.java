@@ -1,22 +1,27 @@
 package org.yearup.workshop;
 
 public abstract class Contract {
-   private  String dateOfContract;
+   private  String date;
    private  String customerName;
    private String customerEmail;
-   private Vehicle vehicle;
+   private Vehicle vehicleSold;
    private Double totalPrice;
    private Double monthlyPayment;
 
    public Contract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicle) {
+      this.date = date;
+      this.customerName = customerName;
+      this.customerEmail = customerEmail;
+      this.vehicleSold = vehicle;
+
    }
 
-   public String getDateOfContract() {
-      return dateOfContract;
+   public String getDate() {
+      return date;
    }
 
-   public void setDateOfContract(String dateOfContract) {
-      this.dateOfContract = dateOfContract;
+   public void setDateOfContract(String date) {
+      this.date = date;
    }
 
    public String getCustomerName() {
@@ -34,21 +39,17 @@ public abstract class Contract {
    public void setCustomerEmail(String customerEmail) {
       this.customerEmail = customerEmail;
    }
-
-   public Vehicle getVehicle() {
-      return vehicle;
+   public Vehicle getVehicleSold() {
+      return vehicleSold;
    }
 
-   public void setVehicleSold(String vehicleSold) {
-      this.vehicle = vehicle;
+   public void setVehicle(Vehicle vehicle) {
+      this.vehicleSold = vehicle;
    }
 
-   public Contract(String dateOfContract, String customerName, String customerEmail, String vehicleSold) {
-      this.dateOfContract = dateOfContract;
-      this.customerName = customerName;
-      this.customerEmail = customerEmail;
-      this.vehicle = vehicle;
-   }
+
+
+
 
    public abstract  double getTotalPrice();
 

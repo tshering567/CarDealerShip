@@ -1,16 +1,19 @@
 package org.yearup.workshop;
 
 import java.text.DecimalFormat;
-import java.util.Scanner;
+import java.time.LocalDate;
 
 public class SalesContract extends Contract{
     private double salesTax;
     private double processingFee;
     private double recordingFee;
     private boolean financed;
+    public void setFinanced(boolean financed) {
+        this.financed = financed;
+    }
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail,Vehicle vehicle) {
-        super(dateOfContract, customerName, customerEmail, vehicle);
+    public SalesContract(LocalDate date, String customerName, String customerEmail, Vehicle vehicle) {
+        super(date.toString(), customerName, customerEmail, vehicle);
     }
 
     public double getSalesTax() {
@@ -30,8 +33,8 @@ public class SalesContract extends Contract{
     }
 
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail, String vehicleSold) {
-        super(dateOfContract, customerName, customerEmail, vehicleSold);
+    public SalesContract(String date, String customerName, String customerEmail, Vehicle vehicleSold) {
+        super(this.date, customerName, customerEmail, vehicleSold);
     }
 
     @Override
@@ -96,10 +99,10 @@ public class SalesContract extends Contract{
         StringBuilder sb = new StringBuilder();
 
         sb.append("SALE|")
-                .append(getDateOfContract()).append("|")
+                .append(getDate()).append("|")
                 .append(getCustomerName()).append("|")
                 .append(getCustomerEmail()).append("|")
-                .append(getVehicle()).append("|")
+                .append(getVehicleSold()).append("|")
                 .append(df.format(getSalesTax())).append("|")
                 .append(df.format(getRecordingFee())).append("|")
                 .append(df.format(getProcessingFee())).append("|")
